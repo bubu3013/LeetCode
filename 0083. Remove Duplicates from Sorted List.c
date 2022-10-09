@@ -3,7 +3,7 @@ struct ListNode* deleteDuplicates(struct ListNode* head){
     if (head == NULL || head->next == NULL)return head;
 //     recursive
     struct ListNode * cur = head;
-//     to find the last duplicates
+//     to find the ""last duplicates""
     while (cur->val == cur->next->val)
     {
         cur = cur->next;
@@ -17,3 +17,23 @@ struct ListNode* deleteDuplicates(struct ListNode* head){
 
 // Runtime: 8 ms, faster than 70.14% of C online submissions for Remove Duplicates from Sorted List.
 // Memory Usage: 6.3 MB, less than 99.56% of C online submissions for Remove Duplicates from Sorted List.
+
+
+struct ListNode* deleteDuplicates(struct ListNode* head){
+//     basic 
+    if (head == NULL || head->next == NULL)return head;
+//     recursive
+    struct ListNode * cur = head->next;
+//     to find the node ""right after"" duplicates
+    while (head->val == cur->val)
+    {
+        cur = cur->next;
+        if (cur == NULL)break;
+    }
+//     reconnect to the next node, and re-do the same procedure
+    head->next = deleteDuplicates(cur);
+    return head;
+}
+
+// Runtime: 11 ms, faster than 45.60% of C online submissions for Remove Duplicates from Sorted List.
+// Memory Usage: 6.3 MB, less than 85.74% of C online submissions for Remove Duplicates from Sorted List.

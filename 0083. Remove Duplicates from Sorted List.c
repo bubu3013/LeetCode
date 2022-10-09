@@ -34,6 +34,5 @@ struct ListNode* deleteDuplicates(struct ListNode* head){
     head->next = deleteDuplicates(cur);
     return head;
 }
-
-// Runtime: 11 ms, faster than 45.60% of C online submissions for Remove Duplicates from Sorted List.
-// Memory Usage: 6.3 MB, less than 85.74% of C online submissions for Remove Duplicates from Sorted List.
+// Runtime: 4 ms, faster than 90.00% of C online submissions for Remove Duplicates from Sorted List II.
+// Memory Usage: 6.3 MB, less than 93.70% of C online submissions for Remove Duplicates from Sorted List II.

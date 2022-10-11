@@ -56,3 +56,6 @@ int* sortedSquares(int* nums, int numsSize, int* returnSize){
 //     * pointer = value
     return ans;
 }
+
+// Runtime: 246 ms, faster than 28.23% of C online submissions for Squares of a Sorted Array.
+// Memory Usage: 20.2 MB, less than 62.63% of C online submissions for Squares of a Sorted Array.

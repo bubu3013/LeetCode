@@ -13,7 +13,7 @@ class Solution {
 public:
     vector <int> ans;
     vector<int> inorderTraversal(TreeNode* root) {
-        if (!root) return ans;
+        if (!root) return ans; //!! notice the return type
 //         in-order
 //         left -> root -> right
         if (root->left){

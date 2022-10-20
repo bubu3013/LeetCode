@@ -16,3 +16,25 @@ public:
 
 // Runtime: 0 ms, faster than 100.00% of C++ online submissions for Climbing Stairs.
 // Memory Usage: 6.2 MB, less than 31.38% of C++ online submissions for Climbing Stairs.
+
+class Solution {
+public:
+    vector <int> steps;
+    int climb(int n){
+        if (steps[n] != (-1))return steps[n];
+        return steps[n] = climb(n - 2) + climb(n - 1);
+    }
+    int climbStairs(int n) {
+        if (n == 1)return 1;
+        steps.resize(n + 1, -1);
+        steps[1] = 1;
+        steps[2] = 2;
+        return climb(n);
+    }
+};
+// the n-th stair is the outcome of (n-1)th stair + (n-2)th stair
+// 1. climb(n) = climb(n-1)+climb(n-2)
+// 2. steps[n] to store the calculated outcomes
+
+// Runtime: 0 ms, faster than 100.00% of C++ online submissions for Climbing Stairs.
+// Memory Usage: 6.2 MB, less than 15.78% of C++ online submissions for Climbing Stairs.

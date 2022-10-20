@@ -7,6 +7,7 @@ public:
         if (n < 0)return 0;
         if (dp[n] != (-1)){return dp[n];}
 //         recursive case
+//         the current cost of n-th starircase is "the current cost" + the min cost of backward 1 or 2 step(s) 
         return dp[n] = cost[n] + min(minCost(n - 1, cost), minCost(n - 2, cost)); 
     }
     int minCostClimbingStairs(vector<int>& cost) {

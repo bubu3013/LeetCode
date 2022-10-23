@@ -87,4 +87,7 @@ public:
     }
 };
 
-// two pointers do not mean you can not use more  than two pointers
+// two pointers do not mean you can not use "more than two pointers"
+
+// Runtime: 54 ms, faster than 70.85% of C++ online submissions for Squares of a Sorted Array.
+// Memory Usage: 25.8 MB, less than 94.55% of C++ online submissions for Squares of a Sorted Array.

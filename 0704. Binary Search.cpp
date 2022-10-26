@@ -26,7 +26,12 @@ public:
 
 // solution 2: C
 
+
+
 int search(int* nums, int numsSize, int target){
+    if (numsSize == 1 && nums[0] == target)return 0;
+    if (numsSize == 1 && nums[0] != target)return -1;
+    
     int left = 0;
     int right = numsSize - 1;
     
@@ -43,5 +48,5 @@ int search(int* nums, int numsSize, int target){
     return -1;
 }
 
-// Runtime: 71 ms, faster than 51.87% of C online submissions for Binary Search.
-// Memory Usage: 7 MB, less than 66.11% of C online submissions for Binary Search.
+// Runtime: 37 ms, faster than 98.10% of C online submissions for Binary Search.
+// Memory Usage: 7.3 MB, less than 5.13% of C online submissions for Binary Search.

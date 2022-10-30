@@ -1,3 +1,5 @@
+// solution 1: C++
+
 class Solution {
 public:
     vector <int> step;
@@ -17,6 +19,7 @@ public:
 // Runtime: 0 ms, faster than 100.00% of C++ online submissions for Climbing Stairs.
 // Memory Usage: 6.2 MB, less than 31.38% of C++ online submissions for Climbing Stairs.
 
+// solution 2: C++
 class Solution {
 public:
     vector <int> steps;
@@ -38,3 +41,24 @@ public:
 
 // Runtime: 0 ms, faster than 100.00% of C++ online submissions for Climbing Stairs.
 // Memory Usage: 6.2 MB, less than 15.78% of C++ online submissions for Climbing Stairs.
+
+// solution 3: C
+
+int dp[46] = {0};
+
+int helper(int n){
+    if (dp[n] != 0)return dp[n];
+    return dp[n] = helper(n - 1) + helper(n - 2);
+    
+}
+
+int climbStairs(int n){
+    if (n < 2)return 1;
+    
+    dp[0] = 1;
+    dp[1] = 1;
+    return helper(n);
+}
+
+// Runtime: 0 ms, faster than 100.00% of C online submissions for Climbing Stairs.
+// Memory Usage: 5.4 MB, less than 65.82% of C online submissions for Climbing Stairs.

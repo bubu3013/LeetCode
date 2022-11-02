@@ -37,3 +37,6 @@ private:
         return ans;
     }    
 };
+
+// Runtime: 67 ms, faster than 24.81% of C++ online submissions for Find All Anagrams in a String.
+// Memory Usage: 13.2 MB, less than 10.85% of C++ online submissions for Find All Anagrams in a String.

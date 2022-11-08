@@ -1,3 +1,4 @@
+//solution 1 - (1) find the pivot (2) check if rotate (3) search the left part (4) search the right part 
 class Solution {
 public:
     int search(vector<int>& nums, int target) {
@@ -52,3 +53,45 @@ private:
 
 // Runtime 4 ms Beats 79.65%
 // Memory 11.1 MB Beats 75.20%
+
+// solution 2 - 
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        return helper(nums, target);
+    }
+private:
+    int helper(vector<int>& nums, int target) {
+        int ans = -1;
+        int left = 0;
+        int right = nums.size() - 1;
+
+        while (left <= right){
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == target){
+                ans = mid;
+                break;
+            }
+            // the upper side
+            else if (nums[left] <= nums[mid]){
+                if (nums[left] <= target && target <= nums[mid]){
+                    right = mid - 1;
+                }else{
+                    left = mid + 1;
+                }
+            }
+            // the lower side
+            else {
+                if (nums[mid] <= target && target <= nums[right]){
+                    left = mid + 1;
+                }else{
+                    right = mid - 1;
+                }
+            }
+        }
+        return ans;
+    }
+};
+
+// Runtime 7 ms Beats 66.25%
+// Memory 10.9 MB Beats 95.71%

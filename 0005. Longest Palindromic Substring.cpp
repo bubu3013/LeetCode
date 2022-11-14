@@ -1,3 +1,4 @@
+// solution 1: oct, 19
 class Solution {
 public:
     vector <vector<int>> dp;
@@ -36,3 +37,44 @@ public:
 
 // Runtime: 784 ms, faster than 15.01% of C++ online submissions for Longest Palindromic Substring.
 // Memory Usage: 287.2 MB, less than 7.53% of C++ online submissions for Longest Palindromic Substring.
+
+// solution 2 - Nov, 14
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        return helper(s);
+    }
+private:
+    vector<vector<int>> dp;
+    int isPalin(string& s, int i, int j){
+        if (i >= j)return 1;
+        else if (dp[i][j] != (-1))return dp[i][j];
+        else if (s[i] == s[j]){
+            return dp[i][j] = isPalin(s, i + 1, j - 1);
+        }
+        else if (s[i] != s[j]){
+            return dp[i][j] = 0;
+        }
+        return dp[i][j];
+    }
+    string helper(string& s){
+        int n = s.length();
+        int max = 0;
+
+        dp.resize(n, vector<int> (n, -1));
+
+        string ans = "";
+        for (int i = 0; i < n; i++){
+            for (int j = 0; j < n; j++){
+                if (j - i + 1 > max && isPalin(s, i, j)){
+                    max = j - i + 1;
+                    ans = s.substr(i, j - i + 1);
+                }
+            }
+        }
+        return ans;
+    }
+};
+
+// Runtime 516 ms Beats 21.86%
+// Memory 287.3 MB Beats 7.14%

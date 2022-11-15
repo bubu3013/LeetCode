@@ -62,3 +62,29 @@ int climbStairs(int n){
 
 // Runtime: 0 ms, faster than 100.00% of C online submissions for Climbing Stairs.
 // Memory Usage: 5.4 MB, less than 65.82% of C online submissions for Climbing Stairs.
+
+// solution 4: C++
+
+class Solution {
+public:
+    int climbStairs(int n) {
+        return climb(n);
+    }
+private:
+    vector<int> dp;
+    int helper(int n){
+        if (dp[n] != -1)return dp[n];
+        return dp[n] = helper(n - 2) + helper(n - 1);
+    }
+    int climb(int n){
+        dp.resize(n + 1, -1);
+        if (n < 2)return 1;
+
+        dp[0] = 1;
+        dp[1] = 1;
+        return helper(n);
+    }
+};
+
+// Runtime 0 ms Beats 100%
+// Memory 6.3 MB Beats 15.44%

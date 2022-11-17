@@ -28,3 +28,33 @@ public:
 
 // the following website helps,
 // https://alchemist-al.com/algorithms/maximum-subarray-problem
+
+// solution 2:
+
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        return helper(nums, nums.size());
+    }
+private:
+    int helper(vector<int>& nums, int n){
+        if (n == 1)return nums[0];
+
+        vector<int> dp(n + 5, 0);
+        dp[0] = nums[0];
+        int maximum = nums[0];
+        for (int i = 1; i < n; i++){
+            if (dp[i - 1] > 0){
+                dp[i] = nums[i] + dp[i - 1];
+            }else{
+                dp[i] = nums[i];
+            }
+            maximum = max(maximum, dp[i]);
+        }
+        return maximum;
+    }
+};
+
+// Runtime 267 ms Beats 47.88% 
+// Memory 70.3 MB Beats 7.47%
+

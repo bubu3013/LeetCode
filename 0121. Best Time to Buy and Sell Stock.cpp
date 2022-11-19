@@ -20,3 +20,20 @@ public:
 
 // Runtime: 150 ms, faster than 87.80% of C++ online submissions for Best Time to Buy and Sell Stock.
 // Memory Usage: 93.3 MB, less than 88.93% of C++ online submissions for Best Time to Buy and Sell Stock.
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        return helper(prices);
+    }
+private:
+    int helper(vector<int> & prices){
+        int min_cost = 10005;
+        int max_pro = -1;
+        for (int i = 0; i < prices.size(); i++){
+            min_cost = min(min_cost, prices[i]);
+            max_pro = max(max_pro, prices[i] - min_cost);
+        }
+        return max_pro;
+    }
+};

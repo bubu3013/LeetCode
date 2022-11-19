@@ -58,3 +58,23 @@ private:
 // Runtime 267 ms Beats 47.88% 
 // Memory 70.3 MB Beats 7.47%
 
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        return helper(nums);
+    }
+private:
+    int helper(vector<int>& nums){
+        int largest_sum = nums[0];
+        for (int i = 1; i < nums.size(); i++){
+            if (nums[i - 1] > 0){
+                nums[i] = nums[i - 1] + nums[i];
+            }
+            largest_sum = max(largest_sum, nums[i]);
+        }
+        return largest_sum;
+    }
+};
+
+// Runtime 135 ms Beats 83.3%
+// Memory 67.9 MB Beats 12.37%

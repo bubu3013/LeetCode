@@ -27,3 +27,34 @@ private:
 
 // Runtime 0 ms Beats 100%
 // Memory 6.7 MB Beats 66.60%
+
+class Solution {
+public:
+    int combinationSum4(vector<int>& nums, int target) {
+        return helper(nums, target);
+    }
+private:
+    int helper(vector<int>& nums, int target){
+        int n = nums.size();
+        vector<int> dp(target + 1, -1);
+        return backtracking(nums, dp, target, n); 
+    }
+    int backtracking(vector<int>& nums, vector<int>& dp, int target, int n){
+        if (target == 0){
+            return 1;
+        }
+        else if (dp[target] != (-1)){
+            return dp[target];
+        }
+        int ans = 0;
+        for (int i = 0; i < n; i++){
+            if (target - nums[i] >= 0){
+                ans += backtracking(nums, dp, target - nums[i], n);
+            }
+        }
+        return dp[target] = ans;
+    }
+};
+
+// Runtime 0 ms Beats 100%
+// Memory 6.5 MB Beats 99.60%

@@ -76,3 +76,40 @@ private:
 
 // Runtime 29 ms Beats 61.62%
 // Memory 14.2 MB Beats 5.11%
+
+// solution 3 - 2022/11/24 practice for grind 75
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        return helper(nums, target, nums.size());
+    }
+private:
+    vector<int> helper(vector<int>& nums, int target, int n) {
+        unordered_map<int, vector<int>> m;
+        vector<int> res;
+        // create the map
+        for (int i = 0; i < n; i++){
+            m[nums[i]].push_back(i);
+        }
+        // find the solution
+        for (int i = 0; i < n; i++){
+            auto iter = m.find(target - nums[i]);
+            if (iter != m.end()){
+                if (iter->second[0] == i && iter->second.size() == 2){
+                    res.push_back(i);
+                    res.push_back(iter->second[1]);
+                    break;
+                }else if (iter->second[0] != i){
+                    res.push_back(i);
+                    res.push_back(iter->second[0]);
+                    break;
+                }
+            }
+        }
+        return res;
+    }
+};
+
+// Runtime 26 ms Beats 68.90% 
+// Memory 14.2 MB Beats 5.7%

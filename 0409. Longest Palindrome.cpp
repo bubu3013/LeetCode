@@ -29,3 +29,36 @@ public:
 
 // Runtime: 19 ms, faster than 5.30% of C++ online submissions for Longest Palindrome.
 // Memory Usage: 7.4 MB, less than 5.32% of C++ online submissions for Longest Palindrome.
+
+// solution 2: 2022/11/25
+
+class Solution {
+public:
+    int longestPalindrome(string s) {
+        return helper(s);
+    }
+private:
+    int helper(string& s){
+        unordered_map<char, int> m;
+        int n = s.length();
+        int ans = 0;
+        int count = 0;
+        bool with_center = false;
+        
+        for (int i = 0; i < n; i++){
+            m[s[i]]++;
+        }
+        for (auto& x: m){
+            if (m[x.first] >= 2){ // can build panlindrome
+                count += m[x.first] / 2;
+            }
+            if (m[x.first] % 2 == 1){// odd with center
+                with_center = true;
+            }
+        }
+        return with_center ? count * 2 + 1 : count * 2;
+    }
+};
+
+// Runtime 0 ms Beats 100% 
+// Memory 6.7 MB Beats 49.99%

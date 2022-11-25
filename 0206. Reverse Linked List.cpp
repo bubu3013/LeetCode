@@ -28,4 +28,28 @@ private:
 
 // solution 2: recursion
 
-// QQ
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        if (head == NULL)return NULL;
+        ListNode* dummy = new ListNode(-5005);
+        dummy->next = head;
+        ListNode* prev = dummy;
+        ListNode* cur = head;
+        ListNode* new_head = reverse(cur, prev);
+        head->next = NULL;
+        return new_head;
+    }
+    ListNode* reverse(ListNode* cur, ListNode* prev) {
+        if (cur == NULL){return prev;}
+        cout<<cur->val<<endl;
+        ListNode* tmp = cur->next;
+        cur->next = prev;
+        prev = reverse(tmp, cur);
+        cur = tmp;
+        return prev;
+    }
+};
+
+// Runtime 16 ms Beats 30.60% 
+// Memory 8.3 MB Beats 40.34%

@@ -57,3 +57,31 @@ public:
 
 // Runtime: 0 ms, faster than 100.00% of C++ online submissions for Middle of the Linked List.
 // Memory Usage: 7.2 MB, less than 21.61% of C++ online submissions for Middle of the Linked List.
+
+// solution 3 - avoid of using fast->next->next
+
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
+        return helper(head);
+    }
+private:
+    ListNode* helper(ListNode* head) {
+        if (head == NULL)return head;
+        ListNode* fast = head;
+        ListNode* slow = head;
+        while (fast && slow){ 
+            fast = fast->next;
+            if (fast){
+                fast = fast->next; // the fast pointer moves forward twice everytime
+            }else{
+                break;
+            }
+            slow = slow->next; // the slow pointer moves forward once everytime
+        }
+        return slow;
+    }
+};
+
+// Runtime 0 ms Beats 100% 
+// Memory 7 MB Beats 95.47%

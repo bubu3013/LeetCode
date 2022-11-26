@@ -1,3 +1,4 @@
+//solution 1: 
 class Solution {
 public:
     string addBinary(string a, string b) {
@@ -60,3 +61,64 @@ public:
 
 // Runtime 0 ms Beats 100%
 // Memory 6.4 MB Beats 36.79%
+
+// solution 2:
+// string to judge
+class Solution {
+public:
+    string addBinary(string a, string b) {
+        // 0. reverse them
+        reverse(a.begin(), a.end());
+        reverse(b.begin(), b.end());
+        return helper(a, b);
+    }
+private:
+    string helper(string& a, string& b) {
+        int i = 0;
+        string c;
+        bool cin = false; // for carry in
+        // 1. append zero for the shorter string
+        while (a.length() < b.length()){
+            a += '0';
+        }
+        while (a.length() > b.length()) {
+            b += '0';
+        }
+        // 2. sum the two strings
+        while (i < a.length()){
+            if (a[i] == '0' && b[i] == '0'){
+                if (cin){
+                    c += '1';
+                    cin = false;
+                }else{
+                    c += '0';
+                    cin = false;
+                }
+            }else if ((a[i] == '0' && b[i] == '1') || (a[i] == '1' && b[i] == '0')){
+                if (cin){
+                    c += '0';
+                    cin = true;
+                }else{
+                    c += '1';
+                    cin = false;
+                }
+            }else{ // a[i] == b[i] == '1'
+                if (cin){
+                    c += '1';
+                    cin = true;
+                }else{
+                    c += '0';
+                    cin = true;
+                }
+            }
+            i++;
+        }
+        // 3. one extra carry in
+        if (cin){
+            c += '1';
+        }
+        // 4. reverse the string and return
+        reverse(c.begin(), c.end());
+        return c;
+    }
+};

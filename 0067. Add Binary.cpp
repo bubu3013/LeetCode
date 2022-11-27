@@ -122,3 +122,53 @@ private:
         return c;
     }
 };
+
+// solution 3: concise method
+
+// sum cin res
+// 3   1    1
+// 2   1    0
+// 1   0    1
+// 0   0    0  
+// sum = a[i] + b[j] + cin
+// cin = sum / 2
+// res = sum % 2
+
+class Solution {
+public:
+    string addBinary(string a, string b) {
+        return helper(a, b);
+    }
+private:            
+    string helper(string& a, string& b) {
+        // add from the last
+        int i = a.length() - 1; 
+        int j = b.length() - 1;
+        int sum = 0;
+        int cin = 0;
+        string res = "";
+        while ( i >= 0 || j >= 0){
+            // calculate how much is it in this digit
+            sum = cin;
+            // convert char to in
+            if (i >= 0){
+                sum += (a[i] - '0');
+            } 
+            if (j >= 0){
+                sum += (b[j] - '0');
+            } 
+            cin = sum / 2;
+            res = ((sum % 2 == 1) ? '1' : '0') + res; 
+            i--; j--;
+        }
+        // the extra digit to add
+        if (cin){
+            res = '1' + res;
+        }
+
+        return res;
+    }
+};
+
+// Runtime 3 ms Beats 82.36% 
+// Memory 7 MB Beats 21.65%

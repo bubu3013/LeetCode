@@ -95,3 +95,75 @@ private:
 
 // Runtime 7 ms Beats 66.25%
 // Memory 10.9 MB Beats 95.71%
+
+// 2022/12/03
+
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int left = 0;
+        int right = nums.size() - 1;
+        int res = -1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == target){
+                res = mid;
+                break;
+            }else if (nums[mid] >= nums[left]){ // the upper side
+                if (nums[left] <= target && target < nums[mid]){
+                    right = mid - 1;
+                }else {
+                    left = mid + 1;
+                }
+            }else {
+                if (nums[mid] < target && target <= nums[right]) {
+                    left = mid + 1;
+                }else {
+                    right = mid - 1;
+                }
+            }
+        }
+        return res;
+    }
+};
+
+/*
+if nums[mid] is in upper side
+-----------------------------------
+(1-1) (1-2)
+|--||-------|
+      /
+     x 
+    /
+  (mid)
+  /
+ x 
+/
+          /
+         /
+        /
+-----------------------------------
+
+if the nums[mid] is in the lower side
+(2-1)      (2-2)
+|---------|----|
+      
+    
+    
+   /
+  /
+ / 
+/
+             /
+            X
+           /
+        (mid)
+         /
+        X
+       / 
+-----------------------------------
+*/
+
+// Runtime 4 ms Beats 78.50% 
+// Memory 11.1 MB Beats 75.64%

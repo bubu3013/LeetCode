@@ -61,3 +61,32 @@ public:
 
 // Runtime 7 ms Beats 87.88% 
 // Memory 9 MB Beats 30.50%
+
+// solution 2: BFS
+
+class Solution {
+public:
+    Node* cloneGraph(Node* node) {
+        return node == NULL ? node : helper(node);
+    }
+private:
+    Node* helper(Node * node){
+        queue<Node*> q; // for the BFS
+        unordered_map<Node*, Node*> m; // <old node, new node>
+        
+        m[node] = new Node(node->val);
+        q.push(node);
+        while (q.empty() == false){ // when there are some nodes which needs to do
+            Node* tmp = q.front(); q.pop();   // get the first node
+            for (auto& iter: tmp->neighbors){ // iterate all the neighbors of tmp
+                if (m.find(iter) == m.end()){ // if the neighbor does not have a copy
+                    m[iter] = new Node(iter->val);
+                    q.push(iter); // since the iter is a node w/p a copy, its neighbors are also a todo -> push into the q
+                }
+                m[tmp]->neighbors.push_back(m[iter]); // push back its neighbors
+            }
+            
+        }
+        return m[node];
+    }
+};

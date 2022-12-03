@@ -62,3 +62,39 @@ private:
 
 // Runtime 31 ms Beats 59.97% 
 // Memory 8.3 MB Beats 76.5%
+
+// 2022/12/03
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        return s.length() == 0 ? 0 : helper(s);
+    }
+private:   
+    int helper(string& s) {
+        int n = s.length();
+        unordered_map<char, int> m;
+        int left = 0;
+        int res = 0;
+        // int cur = 0; fails if dvdf
+        for (int i = 0; i < n; i++){
+            if (m.find(s[i]) == m.end()){ // non existing
+                m[s[i]] = i;
+                // cur++;
+            }else {
+                if (left <= m[s[i]]){
+                    left = m[s[i]] + 1;
+                    m[s[i]] = i;
+                    // cur = 1;
+                }else{
+                    m[s[i]] = i;
+                    // cur++;
+                }
+            }
+            res = max(res, i - left + 1);
+        }
+        return res;
+    }
+};
+// Runtime 20 ms Beats 74.51% 
+// Memory 8.3 MB Beats 61.21%

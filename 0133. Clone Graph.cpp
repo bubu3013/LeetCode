@@ -1,23 +1,4 @@
-/*
-// Definition for a Node.
-class Node {
-public:
-    int val;
-    vector<Node*> neighbors;
-    Node() {
-        val = 0;
-        neighbors = vector<Node*>();
-    }
-    Node(int _val) {
-        val = _val;
-        neighbors = vector<Node*>();
-    }
-    Node(int _val, vector<Node*> _neighbors) {
-        val = _val;
-        neighbors = _neighbors;
-    }
-};
-*/
+// solution 1: DFS
 
 class Solution {
 public:
@@ -53,3 +34,30 @@ private:
 
 // Runtime 11 ms Beats 63.15% 
 // Memory 9.2 MB Beats 9.90%
+
+// 2022/12/03
+
+class Solution {
+public:
+    Node* cloneGraph(Node* node) {
+        return node == NULL ? node : helper(node);
+    }
+    Node* helper(Node* node){
+        unordered_map<Node*, Node*> m;
+        return dfs(node, m);
+    }
+    Node* dfs(Node* node, unordered_map<Node*, Node*>& m){
+        if (m.find(node) == m.end()){
+            m[node] = new Node(node->val);
+            vector<Node*> nei;
+            for (auto& iter: node->neighbors){
+                nei.push_back(dfs(iter, m));
+            }
+            m[node]->neighbors = nei;
+        }
+        return m[node];
+    }
+};
+
+// Runtime 7 ms Beats 87.88% 
+// Memory 9 MB Beats 30.50%

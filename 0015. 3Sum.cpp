@@ -98,3 +98,55 @@ private:
 
 // Runtime 204 ms Beats 42.37%
 // Memory 26 MB Beats 17.66%
+
+// 2022/12/03
+
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        return helper(nums);
+    }
+private:
+    vector<vector<int>> res;
+    vector<vector<int>> helper(vector<int>& nums){
+        
+        int n = nums.size();
+        for (int i = 0; i < nums.size(); i++){
+            if (i - 1 >= 0 && nums[i] == nums[i - 1])continue;
+            twoSum(i, 0 - nums[i], nums);
+        }
+        return res;
+    }
+    void twoSum(int idx, int target, vector<int>& nums){
+        int left = idx + 1;
+        int right = nums.size() - 1;
+        
+        while (left < right){
+            if (left - 1 > idx && nums[left] == nums[left - 1]){ // at least run once for idx
+                left++;
+                continue;
+            }
+            else if (right + 1 < nums.size() && nums[right] == nums[right + 1]){
+                right--;
+                continue;
+            }
+            int sum = nums[left] + nums[right];
+            if (sum == target){
+                vector<int> ans(3, nums[idx]);
+                ans[1] = nums[left];
+                ans[2] = nums[right];
+                res.push_back(ans);
+                left++; right--;
+            }else if (sum < target){
+                left++;
+            }else{
+                right--;
+            }
+        }
+        return;
+    }
+};
+
+// Runtime 262 ms Beats 30.1% 
+// Memory 23.1 MB Beats 33.22%

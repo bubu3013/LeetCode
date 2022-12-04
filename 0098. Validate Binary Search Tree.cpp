@@ -1,14 +1,35 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
+// solution 0: 
+// 1. ckeck if the left-subtree is valid
+// 2. check if the right-subtree is valid
+// 3. return validation of subtrees of left & right 
+
+class Solution {
+public:
+    bool isValidBST(TreeNode* root) {
+        return helper(root);    
+    }
+private:
+    stack<TreeNode*> st;
+    bool helper(TreeNode* root){
+        if (root == NULL)return true;
+
+        // traverse in-order: should be ascending
+        bool left = helper(root->left);
+        // check if it is ascending
+        if (st.empty() == false){ 
+            if (st.top()->val >= root->val){
+                return false;
+            }
+        }
+        st.push(root);
+        
+        bool right = helper(root->right);
+        return left && right;
+    }
+};
+
+// Runtime 9 ms Beats 95.57% 
+// Memory 22.2 MB Beats 5.21%
 
 //solution 1: 
 // 1. traverse the BST in order and store the value in a vector.
